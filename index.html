@@ -8,8 +8,9 @@
 </head>
 <body>
     <h1>图像序列 SVG</h1>
-    <h2>frameSVG</h2>
+    <footer>Art Center 2020 MIT License</footer>
     <div id="app">
+        <button @click="btnExample">查看示例</button>
         <details open>
             <summary>
                 上传图片序列
@@ -19,6 +20,7 @@
             <!-- 生成外链图片的示例链接：https://cdn.jsdelivr.net/gh/LogCreative/LaTeXSparkle/img/Cover.png -->
             <input placeholder="[用户]/[存储库]/[位置]" v-model="addr" @keyup="update">
             <input placeholder="图片公用名称" v-model="name" @keyup="update">
+            <input placeholder="编码长度" v-model="zeroholder" style="width: 20px;" @keyup="update">
             <select v-model="suffix" @change="update">
                 <option>.jpg</option>
                 <option>.png</option>
@@ -27,6 +29,7 @@
             <br>
             <input placeholder="宽度" v-model="width" @keyup="update">
             <input placeholder="高度" v-model="height" @keyup="update">
+            示例文件名：{{filename}}
         </details>
         <details open>
             <summary>
@@ -51,7 +54,6 @@
             </div>
         </details>
     </div>
-    <footer>Art Center 2020 MIT License</footer>
     <!-- 加载 Vue 库 -->
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/vue-clipboard2/0.3.1/vue-clipboard.js"></script>
