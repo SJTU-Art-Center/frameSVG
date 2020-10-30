@@ -17,24 +17,25 @@
             <p>该项需要手动上传至 Github 图床（每张图片不能超过 25 M），然后在下方输入图片序列的相关信息。</p>
             <p>⚠使用较快的 CDN 分发网络，一旦接入图片将不会被修改，使用本工具前务必定稿，否则需要使用重新命名的新序列。转入公众号主体前需要关闭公众号的图片水印功能，微信公众号保存 SVG 代码后会自动更改这些图片的地址，存储在微信的服务器中。</p>
             <!-- 生成外链图片的示例链接：https://cdn.jsdelivr.net/gh/LogCreative/LaTeXSparkle/img/Cover.png -->
-            <input placeholder="图片位置" v-model="addr">
-            <input placeholder="图片公用名称" v-model="name">
-            <select v-model="suffix">
+            <input placeholder="[用户]/[存储库]/[位置]" v-model="addr" @keyup="update">
+            <input placeholder="图片公用名称" v-model="name" @keyup="update">
+            <select v-model="suffix" @change="update">
                 <option>.jpg</option>
                 <option>.png</option>
                 <option>.svg</option>
             </select>
             <br>
-            <input placeholder="宽度" v-model="width">
-            <input placeholder="高度" v-model="height">
+            <input placeholder="宽度" v-model="width" @keyup="update">
+            <input placeholder="高度" v-model="height" @keyup="update">
         </details>
         <details open>
             <summary>
                 时间轴
             </summary>
-            <input placeholder="序列开始帧号" v-model="start">
-            <input placeholder="序列结束帧号" v-model="end">
-            <select v-model="fps">
+            <input placeholder="序列开始帧号" v-model="start" @keyup="update">
+            <input placeholder="序列结束帧号" v-model="end" @keyup="update">
+            <select v-model="fps" @change="update">
+                <option>15</option>
                 <option>30</option>
                 <option>60</option>
             </select>fps
@@ -45,9 +46,8 @@
             </summary>
             <button v-clipboard:copy="code">复制代码</button>
             <br>
-            <textarea class="SVGCode" v-model="code"></textarea>
-            <div class="preview">
-                {{code}}
+            <textarea class="SVGCode">{{code}}</textarea>
+            <div id="preview">
             </div>
         </details>
     </div>
