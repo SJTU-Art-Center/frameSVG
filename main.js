@@ -69,6 +69,7 @@ var app = new Vue({
             this.start = 0;
             this.end = 29;
             this.fps = "30";
+            this.repeat = true;
             this.update();
         },
         gitChange: function(){

@@ -19,11 +19,20 @@ details {
     box-shadow: 1px 1px 1px 1px rgba(129, 129, 129, 0.4);
 }
 
-p{
+p {
     font-size: small;
     color: gray;
 }
 
-#preview{
+#preview {
     background-color: white;
+}
+
+#addr {
+    width: 75%;
+}
+
+#fileName {
+    font-size: small;
+    color: darkslategray;
 }

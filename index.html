@@ -19,27 +19,27 @@
             <p v-show="GithubURL">该项需要手动上传至 Github 图床（每张图片不能超过 25 M，推荐全部文件大小总和在 1 ~ 2 M，以在 1s 左右加载完成），然后在下方输入图片序列的相关信息。<br>⚠使用较快的 CDN 分发网络，一旦接入图片将不会被修改，使用本工具前务必定稿，否则需要使用重新命名的新序列。</p>
             <p>透明底 PNG 调低帧率后会有重影现象，使用 AE 导出 "PNG"序列 时谨慎选择 RGB + Alpha 通道，转入公众号主体前需要关闭公众号的图片水印功能，微信公众号保存 SVG 代码后会自动更改这些图片的地址，存储在微信的服务器中。本网页的 SVG 渲染策略与微信不同，第一遍加载可能会有频闪现象，而微信会全部加载完成后再播放。</p>
             <!-- 生成外链图片的示例链接：https://cdn.jsdelivr.net/gh/LogCreative/LaTeXSparkle/img/Cover.png -->
-            🏢<input placeholder="[用户]/[存储库]/[位置]" id="addr" v-model="addr" @keyup="update">
-            🆎<input placeholder="图片公用名称" v-model="name" @keyup="update">
-            🆔<input placeholder="编码长度" v-model="zeroholder" style="width: 20px;" @keyup="update">
+            <p id="fileName">示例文件名：{{filename}}</p>
+            🏢<input placeholder="[用户]/[存储库]/[位置]" id="addr" v-model="addr" @keyup="update"><br>
+            🆎<input placeholder="图片公用名称" v-model="name" @keyup="update"><br>
+            🆔<input placeholder="编码长度" v-model="zeroholder" style="width: 20px;" @keyup="update"><br>
             📄<select v-model="suffix" @change="update">
                 <option>.jpg</option>
                 <option>.png</option>
                 <option>.svg</option>
             </select>
-            示例文件名：{{filename}}
-            <br>
-            📔<input placeholder="图像宽度" v-model="width" @keyup="update">
-            📚<input placeholder="图像高度" v-model="height" @keyup="update">
-            🔳<input placeholder="展示宽度" v-model="sw" @keyup="update">
+            <hr>
+            📔<input placeholder="图像宽度" v-model="width" @keyup="update"><br>
+            📚<input placeholder="图像高度" v-model="height" @keyup="update"><br>
+            🔳<input placeholder="展示宽度" v-model="sw" @keyup="update"><br>
         </details>
         <details open>
             <summary>
                 时间轴
             </summary>
-            🕑<input placeholder="延迟时间秒数" v-model="delay" @keyup="update">
-            ⏺<input placeholder="序列开始帧号" v-model="start" @keyup="update">
-            ⏹<input placeholder="序列结束帧号" v-model="end" @keyup="update">
+            🕑<input placeholder="延迟时间秒数" v-model="delay" @keyup="update"><br>
+            ⏺<input placeholder="序列开始帧号" v-model="start" @keyup="update"><br>
+            ⏹<input placeholder="序列结束帧号" v-model="end" @keyup="update"><br>
             ⏩<select v-model="fps" @change="update">
                 <option>5</option>
                 <option>15</option>
@@ -47,8 +47,8 @@
                 <option>30</option>
                 <option>45</option>
                 <option>60</option>
-            </select>fps
-            <input type="checkbox" v-model="repeat" @change="update">🔄循环
+            </select>fps<br>
+            🔄<input type="checkbox" v-model="repeat" @change="update">循环
         </details>
         <details open>
             <summary>
