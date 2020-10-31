@@ -9,14 +9,13 @@
 <body>
     <h1>图像序列 SVG</h1>
     <footer>Art Center 2020 <a href="https://github.com/SJTU-Art-Center/frameSVG/blob/main/LICENSE" target="_blank">MIT License</a> <a href="https://github.com/SJTU-Art-Center/frameSVG" target="_blank">贡献代码</a></footer>
-    <p>电脑端会有一定的缩放 bug ，手机看不出来（吧）。🆘</p>
     <div id="app">
         <button @click="btnExample">查看示例</button>
         <details open>
             <summary>
                 上传图片序列
             </summary>
-            <p>该项需要手动上传至 Github 图床（每张图片不能超过 25 M），然后在下方输入图片序列的相关信息。</p>
+            <p>该项需要手动上传至 Github 图床（每张图片不能超过 25 M），然后在下方输入图片序列的相关信息。透明底 PNG 调低帧率后会有重影现象，使用 AE 导出 "PNG"序列 时谨慎选择 RGB + Alpha 通道。</p>
             <p>⚠使用较快的 CDN 分发网络，一旦接入图片将不会被修改，使用本工具前务必定稿，否则需要使用重新命名的新序列。转入公众号主体前需要关闭公众号的图片水印功能，微信公众号保存 SVG 代码后会自动更改这些图片的地址，存储在微信的服务器中。</p>
             <!-- 生成外链图片的示例链接：https://cdn.jsdelivr.net/gh/LogCreative/LaTeXSparkle/img/Cover.png -->
             <input placeholder="[用户]/[存储库]/[位置]" v-model="addr" @keyup="update">
@@ -55,6 +54,7 @@
             <button v-clipboard:copy="code">复制代码</button>
             <br>
             <textarea class="SVGCode">{{code}}</textarea>
+            <hr>
             <div id="preview">
             </div>
         </details>
