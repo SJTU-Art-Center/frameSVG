@@ -27,8 +27,8 @@ var app = new Vue({
             if(this.zeroholder=="") return 5;
             return parseInt(this.zeroholder);
         },
-        keyTimes: function(){
-            return "keyTimes=\"0; " + (this.frametime + 0.004).toFixed(3) + "; "+ (this.frametime + 0.004).toFixed(3) + "; 1\"";
+        keyTimes: function(){   //过多的偏移会导致频闪
+            return "keyTimes=\"0; " + (this.frametime).toFixed(3) + "; "+ (this.frametime + 0.001).toFixed(3) + "; 1\"";
         },
         filename: function(){
             return this.name + (Array(this.zholder).join(0) + 0).slice(-this.zholder) + this.suffix;
@@ -64,7 +64,7 @@ var app = new Vue({
             this.suffix = ".png";
             this.width = "300";
             this.height = "300";
-            this.sw = "60%";
+            this.sw = "100%";
             this.delay = 0.5;
             this.start = 0;
             this.end = 29;

@@ -23,3 +23,7 @@ p{
     font-size: small;
     color: gray;
 }
+
+#preview{
+    background-color: white;
+}
