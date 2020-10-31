@@ -1,6 +1,7 @@
 var app = new Vue({
     el: "#app",
     data:{
+        GithubURL: true,
         addr: "",
         name: "",
         suffix: "",
@@ -12,6 +13,7 @@ var app = new Vue({
         start: 0,
         end: "",
         fps: "",
+        repeat: false,
         code: "",
     },
     computed:{
@@ -32,7 +34,7 @@ var app = new Vue({
             return this.name + (Array(this.zholder).join(0) + 0).slice(-this.zholder) + this.suffix;
         },
         totalTime: function(){
-            return ((parseInt(this.end)-parseInt(this.start))*this.frametime).toFixed(3);
+            return (parseInt(this.end) - parseInt(this.start) + 1) * this.frametime;
         },
     },
     methods:{
@@ -45,16 +47,17 @@ var app = new Vue({
             var codestr_pref = "<section style=\"display: block;\">\n<svg opacity=\"0\""; //最后一个不能拥有height=0 否则不能显示。
             var codestr_mid = " xmlns=\"http://www.w3.org/2000/svg\"  width=\"" + this.sw + "\" " + this.viewbox + " style=\"display: block; pointer-events: none; background-size: 100% auto; background-repeat: no-repeat; margin-bottom: 0px; max-width: none !important; transform: rotateZ(0deg); background-image: url(";
             var codestr_last = ");\">";
-            var animstr_pre = "<animate attributeName=\"opacity\" values=\"1; 1; 0; 0;\" " + this.keyTimes + " fill=\"freeze\" dur=\""+ this.totalTime +"s\" begin=\"";
-            var animstr_pref = "<animate attributeName=\"opacity\" values=\"1; 1; 1; 1;\" " + this.keyTimes + " fill=\"freeze\" dur=\""+ this.totalTime +"s\" begin=\"";
+            var animstr_pre = "<animate attributeName=\"opacity\" values=\"1; 1; 0; 0;\" " + this.keyTimes + " dur=\"";
+            var animstr_pref = "<animate attributeName=\"opacity\" values=\"1; 1; 1; 1;\" " + this.keyTimes + " dur=\"";
             for(var i = parseInt(this.start); i <= parseInt(this.end); ++i)
-                maincode += (i==parseInt(this.start)?codestr_preb:(i==parseInt(this.end)?codestr_pref : codestr_pre))+ codestr_mid + "https://cdn.jsdelivr.net/gh/" + this.addr + "/" + this.name + (Array(this.zholder).join(0) + i).slice(-this.zholder) + this.suffix + codestr_last + "\n" + (i==parseInt(this.end)?animstr_pref : animstr_pre) + (parseFloat(this.delay) + (i * this.frametime)).toFixed(3) +"s\"/>\n</svg>\n</section>\n";
+                maincode += (i==parseInt(this.start)?codestr_preb:(i==parseInt(this.end)?codestr_pref : codestr_pre))+ codestr_mid + (this.GithubURL?"https://cdn.jsdelivr.net/gh/":"") + this.addr + "/" + this.name + (Array(this.zholder).join(0) + i).slice(-this.zholder) + this.suffix + codestr_last + "\n" + (i==parseInt(this.end)?(this.repeat ? animstr_pre : animstr_pref)  : animstr_pre) + (this.totalTime).toFixed(3) + "s\" begin=\"" + (parseFloat(this.delay) + (i * this.frametime)).toFixed(3) +"s\"" + (this.repeat?" repeatCount=\"indefinite\"":" fill=\"freeze\"") + "/>\n</svg>\n</section>\n";
             maincode += "</section>\n";
             this.code = maincode;
             if (this.fps!="")
                 document.getElementById('preview').innerHTML = maincode;          
         },
         btnExample: function(){
+            this.GithubURL = true;
             this.addr = "SJTU-Art-Center/frameSVG@main/storage/flipping";
             this.name = "flipping";
             this.zeroholder = 5;
@@ -66,6 +69,12 @@ var app = new Vue({
             this.start = 0;
             this.end = 29;
             this.fps = "30";
+            this.update();
+        },
+        gitChange: function(){
+            if (this.GithubURL)
+                document.getElementById("addr").placeholder = "[用户]/[存储库]/[位置]";
+            else document.getElementById("addr").placeholder = "自定义链接";
             this.update();
         },
     },
