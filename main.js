@@ -55,8 +55,8 @@ var app = new Vue({
                 document.getElementById('preview').innerHTML = maincode;          
         },
         btnExample: function(){
-            this.addr = "SJTU-Art-Center/frameSVG@main/storage/circle";
-            this.name = "circle";
+            this.addr = "SJTU-Art-Center/frameSVG@main/storage/flipping";
+            this.name = "flipping";
             this.zeroholder = 5;
             this.suffix = ".png";
             this.width = "300";
