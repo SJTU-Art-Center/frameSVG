@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>图像序列 SVG</h1>
-    <footer>Art Center 2020 MIT License</footer>
+    <footer>Art Center 2020 <a href="https://github.com/SJTU-Art-Center/frameSVG/blob/main/LICENSE" target="_blank">MIT License</a> <a href="https://github.com/SJTU-Art-Center/frameSVG" target="_blank">贡献代码</a></footer>
     <p>电脑端会有一定的缩放 bug ，手机看不出来（吧）。🆘</p>
     <div id="app">
         <button @click="btnExample">查看示例</button>
@@ -27,19 +27,23 @@
                 <option>.png</option>
                 <option>.svg</option>
             </select>
-            <br>
-            <input placeholder="宽度" v-model="width" @keyup="update">
-            <input placeholder="高度" v-model="height" @keyup="update">
             示例文件名：{{filename}}
+            <br>
+            <input placeholder="图像宽度" v-model="width" @keyup="update">
+            <input placeholder="图像高度" v-model="height" @keyup="update">
+            <input placeholder="展示宽度" v-model="sw" @keyup="update">
         </details>
         <details open>
             <summary>
                 时间轴
             </summary>
+            <input placeholder="延迟时间秒数" v-model="delay" @keyup="update">
             <input placeholder="序列开始帧号" v-model="start" @keyup="update">
             <input placeholder="序列结束帧号" v-model="end" @keyup="update">
             <select v-model="fps" @change="update">
+                <option>5</option>
                 <option>15</option>
+                <option>25</option>
                 <option>30</option>
                 <option>60</option>
             </select>fps
