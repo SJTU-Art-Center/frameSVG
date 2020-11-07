@@ -39,13 +39,13 @@ var app = new Vue({
     },
     methods:{
         update: function(){
-            var maincode = "<section class=\"frameSVG\">\n";
+            var maincode = "<section powered-by=\"Art Center\">\n";
             // section 不会被微信和谐
             // div 会被微信和谐
             var codestr_preb = "<section style=\"height:0 !important; display: block;\">\n<svg opacity=\"1\""; // 初始帧的不透明度为 1 .
             var codestr_pre = "<section style=\"height:0 !important; display: block;\">\n<svg opacity=\"0\"";
             var codestr_pref = "<section style=\"display: block;\">\n<svg opacity=\"0\""; //最后一个不能拥有height=0 否则不能显示。
-            var codestr_mid = " xmlns=\"http://www.w3.org/2000/svg\"  width=\"" + this.sw + "\" " + this.viewbox + " style=\"display: block; pointer-events: none; background-size: 100% auto; background-repeat: no-repeat; margin-bottom: 0px; max-width: none !important; transform: rotateZ(0deg); background-image: url(";
+            var codestr_mid = " xmlns=\"http://www.w3.org/2000/svg\"  width=\"" + this.sw + "\" " + this.viewbox + " style=\"display: block; pointer-events: none; background-size: 100% auto; background-repeat: no-repeat; margin-bottom: 0px; max-width: 100% !important; transform: rotateZ(0deg); margin: auto; background-image: url(";
             var codestr_last = ");\">";
             var animstr_pre = "<animate attributeName=\"opacity\" values=\"1; 1; 0; 0;\" " + this.keyTimes + " dur=\"";
             var animstr_pref = "<animate attributeName=\"opacity\" values=\"1; 1; 1; 1;\" " + this.keyTimes + " dur=\"";
