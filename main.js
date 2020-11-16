@@ -9,6 +9,8 @@ var app = new Vue({
         width: "",
         height: "",
         sw: "100%",
+        bw: 0,
+        bc: "",
         delay: "",
         start: 0,
         end: "",
@@ -46,7 +48,7 @@ var app = new Vue({
             var codestr_pre = "<section style=\"height:0 !important; display: block;\">\n<svg opacity=\"0\"";
             var codestr_pref = "<section style=\"display: block;\">\n<svg opacity=\"0\""; //最后一个不能拥有height=0 否则不能显示。
             var codestr_mid = " xmlns=\"http://www.w3.org/2000/svg\"  width=\"" + this.sw + "\" " + this.viewbox + " style=\"display: block; pointer-events: none; background-size: 100% auto; background-repeat: no-repeat; margin-bottom: 0px; max-width: 100% !important; transform: rotateZ(0deg); margin: auto; background-image: url(";
-            var codestr_last = ");\">";
+            var codestr_last = ");border-width:" + this.bw + "px; border-style: solid; border-color: " + this.bc + ";\">";
             var animstr_pre = "<animate attributeName=\"opacity\" values=\"1; 1; 0; 0;\" " + this.keyTimes + " dur=\"";
             var animstr_pref = "<animate attributeName=\"opacity\" values=\"1; 1; 1; 1;\" " + this.keyTimes + " dur=\"";
             for(var i = parseInt(this.start); i <= parseInt(this.end); ++i)
