@@ -11,6 +11,7 @@ var app = new Vue({
         sw: "100%",
         bw: 0,
         bc: "",
+        bg: "",
         delay: "",
         start: 0,
         end: "",
@@ -41,7 +42,7 @@ var app = new Vue({
     },
     methods:{
         update: function(){
-            var maincode = "<section powered-by=\"Art Center\">\n";
+            var maincode = "<section powered-by=\"Art Center\""+ (this.bg==""?"":" style=\"background-size: 100%;background-repeat: no-repeat; background-color:blue; background-image: url(" + this.bg + ")\"") +">\n";
             // section 不会被微信和谐
             // div 会被微信和谐
             var codestr_preb = "<section style=\"height:0 !important; display: block;\">\n<svg opacity=\"1\""; // 初始帧的不透明度为 1 .
