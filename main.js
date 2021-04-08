@@ -39,7 +39,7 @@ var app = new Vue({
             return this.name + (Array(this.zholder).join(0) + 0).slice(-this.zholder) + this.suffix;
         },
         totalTime: function(){
-            return (parseInt(this.end) - parseInt(this.start) + 1) * this.frametime;
+            return (Math.abs(parseInt(this.end) - parseInt(this.start)) + 1) * this.frametime;
         },
     },
     methods:{
@@ -54,8 +54,15 @@ var app = new Vue({
             var codestr_last = ");border-width:" + this.bw + "px; border-style: solid; border-color: " + this.bc + ";\">";
             var animstr_pre = "<animate attributeName=\"opacity\" values=\"1; 1; 0; 0;\" " + this.keyTimes + " dur=\"";
             var animstr_pref = "<animate attributeName=\"opacity\" values=\"1; 1; 1; 1;\" " + this.keyTimes + " dur=\"";
-            for(var i = parseInt(this.start); i <= parseInt(this.end); ++i)
-                maincode += (i==parseInt(this.start)?codestr_preb:(i==parseInt(this.end)?codestr_pref : codestr_pre))+ codestr_mid + (this.GithubURL?"https://cdn.jsdelivr.net/gh/":"") + this.addr + "/" + this.name + (Array(this.zholder).join(0) + i).slice(-this.zholder) + this.suffix + codestr_last + "\n" + (i==parseInt(this.end)?(this.repeat ? animstr_pre : animstr_pref)  : animstr_pre) + (this.totalTime).toFixed(3) + "s\" begin=\"" + (parseFloat(this.delay) + (i * this.frametime)).toFixed(3) +"s\"" + (this.repeat?" repeatCount=\"indefinite\"":" fill=\"freeze\"") + "/>\n</svg>\n</section>\n";
+
+            var reverse = parseInt(this.start) > parseInt(this.end);
+            for(var i = parseInt(this.start);
+                (reverse ? i - parseInt(this.end) : parseInt(this.end) - i) >= 0;
+                 reverse ? --i : ++i){
+                    console.log(i);
+                    maincode += (i==parseInt(this.start)?codestr_preb:(i==parseInt(this.end)?codestr_pref : codestr_pre))+ codestr_mid + (this.GithubURL?"https://cdn.jsdelivr.net/gh/":"") + this.addr + "/" + this.name + (Array(this.zholder).join(0) + i).slice(-this.zholder) + this.suffix + codestr_last + "\n" + (i==parseInt(this.end)?(this.repeat ? animstr_pre : animstr_pref)  : animstr_pre) + (this.totalTime).toFixed(3) + "s\" begin=\"" + (parseFloat(this.delay) + ((reverse? (parseInt(this.start) - i) : i) * this.frametime)).toFixed(3) +"s\"" + (this.repeat?" repeatCount=\"indefinite\"":" fill=\"freeze\"") + "/>\n</svg>\n</section>\n";
+                 }
+                
             maincode += "</section>\n";
             this.code = maincode;
             if (this.fps!="")
